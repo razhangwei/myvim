@@ -23,4 +23,51 @@ call vundle#rc()
 " let vundle manage vundle
 Bundle 'gmarik/vundle'
 
+" ============================================================================
+" Active plugins
+
+
+" Terminal Vim with 256 colors colorscheme
+Bundle 'fisadev/fisa-vim-colorscheme'
+
+
+" ============================================================================
+" Vim settings and mappings
+
+" allow plugins by file type
+filetype plugin on
+filetype indent on
+
+" tabs and spaces handling
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" always show status bar
+set ls=2
+
+" incremental search
+set incsearch
+" highlighted search results
+set hlsearch
+
+" syntax highlight on
+syntax on
+
+" show line numbers
+set nu
+
+" use 256 colors when possible
+if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
+	let &t_Co = 256
+    colorscheme fisa
+else
+    colorscheme delek
+endif
+
+" colors for gvim
+if has('gui_running')
+    colorscheme wombat
+endif
 
