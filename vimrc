@@ -29,7 +29,6 @@ Bundle 'gmarik/vundle'
 " YouCompleteMe
 Bundle 'Valloric/YouCompleteMe'
 " Java Autocomplete
-"Bundle 'javacomplete'
 Bundle 'adragomir/javacomplete'
 " syntastic: detect compiling errors while editing
 Bundle 'scrooloose/syntastic'
@@ -41,26 +40,37 @@ Bundle 'majutsushi/tagbar'
 " Terminal Vim with 256 colors colorscheme
 Bundle 'fisadev/fisa-vim-colorscheme'
 " automatic closing of quotes, parenthesis, brackets, etc.
-Bundle 'Raimondi/delimitMate'
-
+"Bundle 'Raimondi/delimitMate'
+" compile most of files with one key
 Bundle 'vim-scripts/SingleCompile'
+" Sublime-Text like multi-cursor support
+Bundle 'terryma/vim-multiple-cursors'
 
 " ============================================================================
 " Vim settings and mappings
+let mapleader=","
+let g:mapleader=","
+imap <leader><leader> <esc>
+
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
 
 " allow plugins by file type
 filetype plugin on
 filetype indent on
 
 " tabs and spaces handling
-set smarttab        " insert tabs on the start of a line according to context
+"set smarttab        " insert tabs on the start of a line according to context
 set expandtab
 set softtabstop=4
 set shiftwidth=4
+autocmd Filetype matlab setlocal ts=2 sts=2 sw=2
 
 " always show status bar
 set ls=2
-
+set autoread            " auto read when file is changed from outside
 " incremental search
 set incsearch
 " highlighted search results
@@ -71,6 +81,9 @@ syntax on
 
 " show line numbers
 set nu
+
+" enable mouse scrolling
+set mouse=a
 
 " remember cursor's position of last time
 if has("autocmd")
@@ -89,6 +102,10 @@ endif
 if has('gui_running')
     colorscheme wombat
 endif
+
+"auto relaod vimrc when editing it
+autocmd! bufwritepost .vimrc source ~/.vimrc
+autocmd! bufwritepost vimrc source ~/.vimrc
 
 " --- YCM(YouCompleteMe) & eclim---
 " *** usage: use C-X C-X or C-<space> to trigger the completion ***
@@ -129,10 +146,10 @@ let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 1
 " custom icons (enable them if you use a patched font, and enable the previous  setting)
-"let g:syntastic_error_symbol = '✗'
-"let g:syntastic_warning_symbol = '⚠'
-"let g:syntastic_style_error_symbol = '✗'
-"let g:syntastic_style_warning_symbol = '⚠')
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
 
 "---ListToggle ----------
 "let g:lt_location_list_toggle_map = '<F2>'
@@ -158,7 +175,8 @@ let g:tagbar_width = 25
 nmap <F9> :SCCompile<CR>
 nmap <F10> :SCCompile<CR>
 
-""""
+
+"---fix the backspace failure problem
 
 func Backspace()
   if col('.') == 1
