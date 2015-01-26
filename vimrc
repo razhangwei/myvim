@@ -45,6 +45,8 @@ Bundle 'fisadev/fisa-vim-colorscheme'
 Bundle 'vim-scripts/SingleCompile'
 " Sublime-Text like multi-cursor support
 Bundle 'terryma/vim-multiple-cursors'
+" Vim plugin for intensely orgasmic commenting
+Bundle 'scrooloose/nerdcommenter'
 
 " ============================================================================
 " Vim settings and mappings
