@@ -64,10 +64,11 @@ filetype plugin on
 filetype indent on
 
 " tabs and spaces handling
-"set smarttab        " insert tabs on the start of a line according to context
-set expandtab
-set softtabstop=4
-set shiftwidth=4
+set tabstop=4
+set shiftwidth=4	" allows you to use the < and > to block indent/unindent regions
+set smarttab		" use shiftwidth setting for inserting <tab>s
+set expandtab		" insert spaces instead of <Tab> when <tab> key is pressed
+set softtabstop=4	" makes VIM see multiple space characters as tabstops
 autocmd Filetype matlab setlocal ts=2 sts=2 sw=2
 
 " always show status bar
