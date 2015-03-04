@@ -110,6 +110,12 @@ endif
 autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
 
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
+
+
 " --- YCM(YouCompleteMe) & eclim---
 " *** usage: use C-X C-X or C-<space> to trigger the completion ***
 " the flowing line enable YCM to do powful C++ completion funtionality
