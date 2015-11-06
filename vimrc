@@ -219,6 +219,11 @@ let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
 let g:lt_height = 10
 
+"---Python-Mode----------
+" turn off the completion functionality from Rope 
+" so that it won't conflict with YCM
+let g:pymode_rope_completion = 0
+
 "---toggle nerdtree display
 map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
