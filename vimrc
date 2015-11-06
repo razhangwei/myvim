@@ -3,6 +3,7 @@
 
 " no vi-compatible
 set nocompatible
+filetype off        " required! for Vundle
 
 " setting up vundle - the vim plugin bundler
 let icanhazvundle=1
@@ -14,8 +15,6 @@ if !filereadable(vundle_readme)
     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
     let icanhazvundle=0
 endif
-
-filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -59,9 +58,17 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" enable the cmd+c to do 'system-copy' in terminal-vim
+vmap <C-c> "py
+nmap <C-c> "pyiw
+vmap <C-p> "pp
+nmap <C-p> "pP
+imap <C-p> <Esc>"ppa
+
 " allow plugins by file type
-filetype plugin on
-filetype indent on
+filetype on         " Enable filetype detection
+filetype plugin on  " Enable filetype-spefic indenting
+filetype indent on  " Enable filetype-spefic plugins
 
 " tabs and spaces handling
 set tabstop=4
@@ -69,29 +76,38 @@ set shiftwidth=4	" allows you to use the < and > to block indent/unindent region
 set smarttab		" use shiftwidth setting for inserting <tab>s
 set expandtab		" insert spaces instead of <Tab> when <tab> key is pressed
 set softtabstop=4	" makes VIM see multiple space characters as tabstops
+set autoindent      " the indent of the new line will match that of previous line
 autocmd Filetype matlab setlocal ts=2 sts=2 sw=2
+autocmd Filetype Makefile set noexpandtab
 
-" always show status bar
+" always show a status line 
 set ls=2
-set autoread            " auto read when file is changed from outside
-" incremental search
+" auto read when file is changed from outside
+set autoread  
+" increamental search
 set incsearch
 " highlighted search results
 set hlsearch
-
 " syntax highlight on
 syntax on
-
 " show line numbers
 set nu
-
 " enable mouse scrolling
 set mouse=a
+" highlight current line
+set cursorline      
+set cursorcolumn
+
+set wildchar=<TAB>  
+set wildmenu        " enable a menu at the bottom of the vim
+set showmatch       " show the matched brace when typing
+set showmode        " indicate input or replace mode at bottom 
 
 " remember cursor's position of last time
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
 
 " use 256 colors when possible
 if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
@@ -110,10 +126,41 @@ endif
 autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
 
-set encoding=utf-8
+" ============================================================================
+" USEFUL SHORTCUTS
+" ============================================================================
+map <leader>a ggVG
+nmap <leader>p <Esc>:set paste<CR>
+nmap <leader>np <Esc>:set nopaste<CR>
+
+" Bash like keys for the command line
+cmap <C-A> <Home>
+cmap <C-E> <End> cmap <C-K> <C-C>
+
+" ============================================================================
+" ENCODING SETTINGS
+" ============================================================================
+set encoding=utf-8                                  
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
+
+fun! ViewUTF8()
+  set encoding=utf-8                                  
+  set termencoding=big5
+endfun
+
+fun! UTF8()
+  set encoding=utf-8                                  
+  set termencoding=big5
+  set fileencoding=utf-8
+  set fileencodings=ucs-bom,big5,utf-8,latin1
+endfun
+
+fun! Big5()
+  set encoding=big5
+  set fileencoding=big5
+endfun
 
 
 " --- YCM(YouCompleteMe) & eclim---
@@ -161,15 +208,15 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 
 "---ListToggle ----------
-"let g:lt_location_list_toggle_map = '<F2>'
-"let g:lt_quickfix_list_toggle_map = '<F3>'
-"let g:lt_height = 10
+let g:lt_location_list_toggle_map = '<F2>'
+let g:lt_quickfix_list_toggle_map = '<F3>'
+let g:lt_height = 10
 
 "---toggle nerdtree display
 map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
 nmap ,t :NERDTreeFind<CR>
-" don;t show these file types
+" don't show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 let g:NERDTreeWinSize = 25
 
