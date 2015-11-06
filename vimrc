@@ -38,8 +38,10 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'majutsushi/tagbar'
 " Terminal Vim with 256 colors colorscheme
 Bundle 'fisadev/fisa-vim-colorscheme'
-" automatic closing of quotes, parenthesis, brackets, etc.
-"Bundle 'Raimondi/delimitMate'
+" Git integration
+Bundle 'tpope/vim-fugitive'
+" a status bar that displays many info
+Bundle 'klen/python-mode'
 " compile most of files with one key
 Bundle 'vim-scripts/SingleCompile'
 " Sublime-Text like multi-cursor support
@@ -96,7 +98,10 @@ set nu
 set mouse=a
 " highlight current line
 set cursorline      
-set cursorcolumn
+" enable folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
 
 set wildchar=<TAB>  
 set wildmenu        " enable a menu at the bottom of the vim
@@ -136,6 +141,12 @@ nmap <leader>np <Esc>:set nopaste<CR>
 " Bash like keys for the command line
 cmap <C-A> <Home>
 cmap <C-E> <End> cmap <C-K> <C-C>
+
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " ============================================================================
 " ENCODING SETTINGS
@@ -186,14 +197,8 @@ let g:ycm_semantic_triggers =  {
       \   'erlang' : [':'],
       \   'html' : ['.'],
       \ }
-" The following is for eclim, This will make YCM and Eclim play nice; YCM will
-" use Eclim's omnifuncs as the data source for semantic completions and
-" provide the auto-triggering and subsequence-based matching (and other YCM
-" features) on top of it.
-let g:EclimCompletionMethod = 'omnifunc'
 
-let g:clang_user_options='|| exit 0'
-" Syntastic ------------------------------
+"---Syntastic -----------
 "
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
@@ -206,6 +211,8 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
+" disable python checker since python-mode provides a better checking
+let g:syntastic_ignore_files = ['\.py$']
 
 "---ListToggle ----------
 let g:lt_location_list_toggle_map = '<F2>'
@@ -231,6 +238,9 @@ let g:tagbar_width = 25
 nmap <F9> :SCCompile<CR>
 nmap <F10> :SCCompile<CR>
 
+"---NerdCommenter-----------------------
+vmap <C-_> <leader>cc
+nmap <C-_> <leader>cc
 
 "---fix the backspace failure problem
 
