@@ -61,11 +61,11 @@ map <left> <nop>
 map <right> <nop>
 
 " enable the cmd+c to do 'system-copy' in terminal-vim
-vmap <C-c> "py
-nmap <C-c> "pyiw
-vmap <C-p> "pp
-nmap <C-p> "pP
-imap <C-p> <Esc>"ppa
+vmap <C-c> "+y
+nmap <C-c> "+y
+vmap <C-v> "+p
+nmap <C-v> "+p
+imap <C-v> <Esc>"+pA
 
 " allow plugins by file type
 filetype on         " Enable filetype detection
