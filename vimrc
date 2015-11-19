@@ -38,16 +38,20 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'majutsushi/tagbar'
 " Terminal Vim with 256 colors colorscheme
 Bundle 'fisadev/fisa-vim-colorscheme'
+Bundle 'vim-scripts/Wombat'
 " Git integration
 Bundle 'tpope/vim-fugitive'
 " a status bar that displays many info
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
 " compile most of files with one key
 Bundle 'vim-scripts/SingleCompile'
 " Sublime-Text like multi-cursor support
 Bundle 'terryma/vim-multiple-cursors'
 " Vim plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
+" Snippets support
+"Bundle 'SirVer/ultisnips'
+"Bundle 'honza/vim-snippets'
 
 " ============================================================================
 " Vim settings and mappings
@@ -86,10 +90,10 @@ autocmd Filetype Makefile set noexpandtab
 set ls=2
 " auto read when file is changed from outside
 set autoread  
-" increamental search
-set incsearch
-" highlighted search results
-set hlsearch
+" for searches
+set incsearch       " incremental searches
+set hlsearch        " highlight search result
+set ignorecase      " ignore cases
 " syntax highlight on
 syntax on
 " show line numbers
@@ -142,13 +146,37 @@ nmap <leader>np <Esc>:set nopaste<CR>
 cmap <C-A> <Home>
 cmap <C-E> <End> cmap <C-K> <C-C>
 
-" Split navigation
+" Split Related 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
 
-" ============================================================================
+" Tab behaviors
+nnoremap <S-Tab> <<             
+inoremap <S-Tab> <C-d>           
+
+" Under normal mode, let Ctrl+Enter to start a new line. 
+" <NL> represents Ctrl-Enter
+nmap <NL> i<CR>
+
+" Tab pages key binding
+map gc :tabnew<CR>     
+map gk :tabclose<CR>
+map gn :tabn<CR>
+map g1 :tabn 1<CR>
+map g2 :tabn 2<CR>
+map g3 :tabn 3<CR>
+map g4 :tabn 4<CR>
+map g5 :tabn 5<CR>
+map g6 :tabn 6<CR>
+map g7 :tabn 7<CR>
+map g8 :tabn 8<CR>
+map g9 :tabn 9<CR>
+
+" ===========================================================================
 " ENCODING SETTINGS
 " ============================================================================
 set encoding=utf-8                                  
@@ -222,10 +250,12 @@ let g:lt_height = 10
 "---Python-Mode----------
 " turn off the completion functionality from Rope 
 " so that it won't conflict with YCM
-let g:pymode_rope_completion = 0
+let g:pymode_rope = 0
+"let g:pymode_rope_lookup_project = 0
 
-"---toggle nerdtree display
-map <F3> :NERDTreeToggle<CR>
+"--- NERDTree & NERDTreeTabs------------
+map <F2> <Esc>:NERDTreeTabsToggle<CR>
+map <F3> <Esc>:NERDTreeToggle<CR>
 " open nerdtree with the current file selected
 nmap ,t :NERDTreeFind<CR>
 " don't show these file types
@@ -244,9 +274,11 @@ nmap <F9> :SCCompile<CR>
 nmap <F10> :SCCompile<CR>
 
 "---NerdCommenter-----------------------
-vmap <C-_> <leader>cc
-nmap <C-_> <leader>cc
+vmap <C-_> <leader>c<space>
+nmap <C-_> <leader>c<space>
 
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 "---fix the backspace failure problem
 
 func Backspace()
