@@ -59,18 +59,6 @@ let mapleader=","
 let g:mapleader=","
 imap <leader><leader> <esc>
 
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-" enable the cmd+c to do 'system-copy' in terminal-vim
-vmap <C-c> "+y
-nmap <C-c> "+y
-vmap <C-v> "+p
-nmap <C-v> "+p
-imap <C-v> <Esc>"+pA
-
 " allow plugins by file type
 filetype on         " Enable filetype detection
 filetype plugin on  " Enable filetype-spefic indenting
@@ -146,6 +134,13 @@ nmap <leader>np <Esc>:set nopaste<CR>
 cmap <C-A> <Home>
 cmap <C-E> <End> cmap <C-K> <C-C>
 
+" enable the cmd+c to do 'system-copy' in terminal-vim
+vmap <C-c> "+y
+nmap <C-c> "+y
+vmap <C-v> "+p
+nmap <C-v> "+p
+imap <C-v> <Esc>"+pA
+
 " Split Related 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -161,6 +156,14 @@ inoremap <S-Tab> <C-d>
 " Under normal mode, let Ctrl+Enter to start a new line. 
 " <NL> represents Ctrl-Enter
 nmap <NL> i<CR>
+
+" move a line upward/downward
+nnoremap <A-down> :m .+1<CR>==
+nnoremap <A-up> :m .-2<CR>==
+inoremap <A-down> <Esc>:m .+1<CR>==gi
+inoremap <A-up> <Esc>:m .-2<CR>==gi
+vnoremap <A-down> :m '>+1<CR>gv=gv
+vnoremap <A-up> :m '<-2<CR>gv=gv
 
 " Tab pages key binding
 map gc :tabnew<CR>     
