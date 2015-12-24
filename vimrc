@@ -36,22 +36,20 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 " show function/variables
 Bundle 'majutsushi/tagbar'
-" Terminal Vim with 256 colors colorscheme
-Bundle 'fisadev/fisa-vim-colorscheme'
-Bundle 'vim-scripts/Wombat'
+" Sublime-like theme
+Bundle 'wellsjo/wellsokai.vim'
 " Git integration
 Bundle 'tpope/vim-fugitive'
-" a status bar that displays many info
-" Bundle 'klen/python-mode'
 " compile most of files with one key
 Bundle 'vim-scripts/SingleCompile'
 " Sublime-Text like multi-cursor support
 Bundle 'terryma/vim-multiple-cursors'
 " Vim plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
-" Snippets support
-"Bundle 'SirVer/ultisnips'
-"Bundle 'honza/vim-snippets'
+" allow you to use <Tab> for all insert completion tasks.
+Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 
 " ============================================================================
 " Vim settings and mappings
@@ -109,14 +107,18 @@ endif
 " use 256 colors when possible
 if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
 	let &t_Co = 256
-    colorscheme fisa
+    colorscheme wellsokai
 else
-    colorscheme delek
+    colorscheme wellsokai
 endif
 
 " colors for gvim
 if has('gui_running')
-    colorscheme wombat
+    colorscheme wellsokai
+    set guifont=Monaco
+    set transparency=10
+    " turn off MacVim's toolbar, scrollbars, etc.
+    set guioptions=aAce 
 endif
 
 "auto relaod vimrc when editing it
@@ -228,6 +230,10 @@ let g:ycm_semantic_triggers =  {
       \   'erlang' : [':'],
       \   'html' : ['.'],
       \ }
+" make YCM compatible with UltiSnips(using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 "---Syntastic -----------
 "
@@ -242,19 +248,11 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
-" disable python checker since python-mode provides a better checking
-let g:syntastic_ignore_files = ['\.py$']
 
 "---ListToggle ----------
 let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
 let g:lt_height = 10
-
-"---Python-Mode----------
-" turn off the completion functionality from Rope 
-" so that it won't conflict with YCM
-let g:pymode_rope = 0
-"let g:pymode_rope_lookup_project = 0
 
 "--- NERDTree & NERDTreeTabs------------
 map <F2> <Esc>:NERDTreeTabsToggle<CR>
@@ -280,10 +278,16 @@ nmap <F10> :SCCompile<CR>
 vmap <C-_> <leader>c<space>
 nmap <C-_> <leader>c<space>
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-"---fix the backspace failure problem
+"---UltiSnips---------------------------
+let g:UltiSnipsExpandTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+" let :UltiSnipsEdit to split your window
+let g:UltiSnipsEditSplit='vertical'
 
+
+
+"---fix the backspace failure problem
 func Backspace()
   if col('.') == 1
     if line('.')  != 1
