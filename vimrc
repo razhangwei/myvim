@@ -115,19 +115,25 @@ else
     colorscheme wellsokai
 endif
 
+set sessionoptions+=resize,winpos
+
 " colors for gvim
 if has('gui_running')
     colorscheme wellsokai
-    set guifont=Monaco
-    set transparency=10
+    " set guifont=Monaco
+    " set transparency=10
     " turn off MacVim's toolbar, scrollbars, etc.
     set guioptions=aAce 
+    set lines=30
+    set columns=110
 endif
 
 "auto relaod vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
 
+" automatically change the current directory
+autocmd BufEnter * silent! lcd %:p:h
 " ============================================================================
 " USEFUL SHORTCUTS
 " ============================================================================
@@ -183,6 +189,9 @@ map g6 :tabn 6<CR>
 map g7 :tabn 7<CR>
 map g8 :tabn 8<CR>
 map g9 :tabn 9<CR>
+
+"  change directory to file being edited; after change, print the directory.
+" nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 " ===========================================================================
 " ENCODING SETTINGS
@@ -251,6 +260,8 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
+" choose pylint as the checker for python
+let g:syntatic_python_checkers = ['pylint']
 
 "---ListToggle ----------
 let g:lt_location_list_toggle_map = '<F2>'
