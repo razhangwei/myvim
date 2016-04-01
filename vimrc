@@ -46,8 +46,11 @@ Bundle 'vim-scripts/SingleCompile'
 Bundle 'terryma/vim-multiple-cursors'
 " Vim plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
+" automatic closingn of quotes, parenthesis, brackets, etc.
+Bundle 'Raimondi/delimitMate'
 " allow you to use <Tab> for all insert completion tasks.
 Bundle 'ervandew/supertab'
+" Snippets
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 
