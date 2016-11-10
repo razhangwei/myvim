@@ -91,6 +91,8 @@ set nu
 set mouse=a
 " highlight current line
 set cursorline      
+" make backspace work like most other apps
+set backspace=2
 " enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -252,7 +254,7 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
 " check also when just opened the file
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 1
 " custom icons (enable them if you use a patched font, and enable the previous  setting)
@@ -262,6 +264,7 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 " choose pylint as the checker for python
 let g:syntatic_python_checkers = ['pylint']
+let g:syntastic_quiet_messages = {'type' : '(D103)'}
 
 "---ListToggle ----------
 let g:lt_location_list_toggle_map = '<F2>'
