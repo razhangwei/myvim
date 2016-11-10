@@ -53,6 +53,8 @@ Bundle 'ervandew/supertab'
 " Snippets
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
+" autoformat
+Bundle 'Chiel92/vim-autoformat'
 
 " ============================================================================
 " Vim settings and mappings
@@ -67,18 +69,18 @@ filetype indent on  " Enable filetype-spefic plugins
 
 " tabs and spaces handling
 set tabstop=4
-set shiftwidth=4	" allows you to use the < and > to block indent/unindent regions
-set smarttab		" use shiftwidth setting for inserting <tab>s
-set expandtab		" insert spaces instead of <Tab> when <tab> key is pressed
-set softtabstop=4	" makes VIM see multiple space characters as tabstops
+set shiftwidth=4    " allows you to use the < and > to block indent/unindent regions
+set smarttab        " use shiftwidth setting for inserting <tab>s
+set expandtab       " insert spaces instead of <Tab> when <tab> key is pressed
+set softtabstop=4   " makes VIM see multiple space characters as tabstops
 set autoindent      " the indent of the new line will match that of previous line
 autocmd Filetype matlab setlocal ts=2 sts=2 sw=2
 autocmd Filetype Makefile set noexpandtab
 
-" always show a status line 
+" always show a status line
 set ls=2
 " auto read when file is changed from outside
-set autoread  
+set autoread
 " for searches
 set incsearch       " incremental searches
 set hlsearch        " highlight search result
@@ -90,7 +92,7 @@ set nu
 " enable mouse scrolling
 set mouse=a
 " highlight current line
-set cursorline      
+set cursorline
 " make backspace work like most other apps
 set backspace=2
 " enable folding
@@ -98,10 +100,10 @@ set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
 
-set wildchar=<TAB>  
+set wildchar=<TAB>
 set wildmenu        " enable a menu at the bottom of the vim
 set showmatch       " show the matched brace when typing
-set showmode        " indicate input or replace mode at bottom 
+set showmode        " indicate input or replace mode at bottom
 
 " remember cursor's position of last time
 if has("autocmd")
@@ -111,7 +113,7 @@ endif
 
 " use 256 colors when possible
 if &term =~? 'mlterm\|xterm\|xterm-256\|screen-256'
-	let &t_Co = 256
+    let &t_Co = 256
     colorscheme wellsokai
 else
     colorscheme wellsokai
@@ -125,7 +127,7 @@ if has('gui_running')
     " set guifont=Monaco
     " set transparency=10
     " turn off MacVim's toolbar, scrollbars, etc.
-    set guioptions=aAce 
+    set guioptions=aAce
     set lines=30
     set columns=110
 endif
@@ -154,19 +156,20 @@ vmap <C-v> "+p
 nmap <C-v> "+p
 imap <C-v> <Esc>"+pA
 
-" Split Related 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" Split Related
+let g:BASH_Ctrl_j = 'off'
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
 " Tab behaviors
-nnoremap <S-Tab> <<             
-inoremap <S-Tab> <C-d>           
+nnoremap <S-Tab> <<
+inoremap <S-Tab> <C-d>
 
-" Under normal mode, let Ctrl+Enter to start a new line. 
+" Under normal mode, let Ctrl+Enter to start a new line.
 " <NL> represents Ctrl-Enter
 nmap <NL> i<CR>
 
@@ -179,7 +182,7 @@ vnoremap <A-down> :m '>+1<CR>gv=gv
 vnoremap <A-up> :m '<-2<CR>gv=gv
 
 " Tab pages key binding
-map gc :tabnew<CR>     
+map gc :tabnew<CR>
 map gk :tabclose<CR>
 map gn :tabn<CR>
 map g1 :tabn 1<CR>
@@ -198,26 +201,26 @@ map g9 :tabn 9<CR>
 " ===========================================================================
 " ENCODING SETTINGS
 " ============================================================================
-set encoding=utf-8                                  
+set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
 
 fun! ViewUTF8()
-  set encoding=utf-8                                  
-  set termencoding=big5
+    set encoding=utf-8
+    set termencoding=big5
 endfun
 
 fun! UTF8()
-  set encoding=utf-8                                  
-  set termencoding=big5
-  set fileencoding=utf-8
-  set fileencodings=ucs-bom,big5,utf-8,latin1
+    set encoding=utf-8
+    set termencoding=big5
+    set fileencoding=utf-8
+    set fileencodings=ucs-bom,big5,utf-8,latin1
 endfun
 
 fun! Big5()
-  set encoding=big5
-  set fileencoding=big5
+    set encoding=big5
+    set fileencoding=big5
 endfun
 
 
@@ -232,18 +235,18 @@ endfun
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:ycm_semantic_triggers =  {
-      \   'c' : ['->', '.'],
-      \   'objc' : ['->', '.'],
-      \   'ocaml' : ['.', '#'],
-      \   'cpp,objcpp' : ['->', '.', '::'],
-      \   'perl' : ['->'],
-      \   'php' : ['->', '::'],
-      \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
-      \   'ruby' : ['.', '::'],
-      \   'lua' : ['.', ':'],
-      \   'erlang' : [':'],
-      \   'html' : ['.'],
-      \ }
+            \   'c' : ['->', '.'],
+            \   'objc' : ['->', '.'],
+            \   'ocaml' : ['.', '#'],
+            \   'cpp,objcpp' : ['->', '.', '::'],
+            \   'perl' : ['->'],
+            \   'php' : ['->', '::'],
+            \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
+            \   'ruby' : ['.', '::'],
+            \   'lua' : ['.', ':'],
+            \   'erlang' : [':'],
+            \   'html' : ['.'],
+            \ }
 " make YCM compatible with UltiSnips(using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -286,7 +289,7 @@ let g:NERDTreeWinSize = 25
 let g:NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
-"---Tagbar ----------------------------- 
+"---Tagbar -----------------------------
 " toggle tagbar display
 map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
