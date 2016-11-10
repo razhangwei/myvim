@@ -264,7 +264,13 @@ map <F3> <Esc>:NERDTreeToggle<CR>
 nmap ,t :NERDTreeFind<CR>
 " don't show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+" disable that old “Press ? for help”.
+let NERDTreeMinimalUI = 1
+" looks nicer
+let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 25
+let g:NERDTreeQuitOnOpen = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
 
 "---Tagbar ----------------------------- 
 " toggle tagbar display
@@ -291,16 +297,16 @@ let g:UltiSnipsEditSplit='vertical'
 
 
 "---fix the backspace failure problem
-func Backspace()
-  if col('.') == 1
-    if line('.')  != 1
-      return  "\<ESC>kA\<Del>"
-    else
-      return ""
-    endif
-  else
-    return "\<Left>\<Del>"
-  endif
-endfunc
-
-inoremap <BS> <c-r>=Backspace()<CR>
+"func Backspace()
+"  if col('.') == 1
+"    if line('.')  != 1
+"      return  "\<ESC>kA\<Del>"
+"    else
+"      return ""
+"    endif
+"  else
+"    return "\<Left>\<Del>"
+"  endif
+"endfunc
+"
+"inoremap <BS> <c-r>=Backspace()<CR>
